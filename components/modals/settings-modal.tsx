@@ -34,8 +34,8 @@ export const SettingsModal = () =>{
                             </span>
 
                         </div>
-                        <ModeToggle/>
                     </div>
+                        <ModeToggle/>
 
                 </div>
             </DialogContent>
