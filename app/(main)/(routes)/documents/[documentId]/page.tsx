@@ -1,4 +1,4 @@
-const DocumentPage = () => {
+const DocumentIdPage = () => {
     return ( 
         <div>
         Document Id
@@ -6,4 +6,4 @@ const DocumentPage = () => {
      );
 }
  
-export default DocumentPage;
+export default DocumentIdPage;
