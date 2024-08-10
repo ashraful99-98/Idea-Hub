@@ -11,4 +11,35 @@ import {
 
 interface IconPickerProps {
   onChange: (icon: string) => void;
+  children: React.ReactNode;
+  asChild?: boolean;
 }
+
+export const IconPicker = ({
+  onChange,
+  children,
+  asChild,
+}: IconPickerProps) => {
+  const { resolvedTheme } = useTheme();
+  const currectTheme = (resolvedTheme || "light") as keyof typeof themeMap;
+
+  const themeMap = {
+    dark: Theme.DARK,
+    light: Theme.LIGHT,
+  };
+
+  const theme = themeMap[currectTheme];
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild={asChild}>{children}</PopoverTrigger>
+      <PopoverContent className=" p-0 w-full border-none shadow-none">
+        <EmojiPicker
+          height={350}
+          theme={theme}
+          onEmojiClick={(data) => onChange(data.emoji)}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+};
