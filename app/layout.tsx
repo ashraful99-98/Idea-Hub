@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/themes-providers";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { ModelProvider } from "@/components/providers/model-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,20 +12,19 @@ export const metadata: Metadata = {
   title: "IdeaHub",
   description: "The connected workspace where better, faster work happens.",
   icons: {
-    icon:[
+    icon: [
       {
         media: "(prefers-color-scheme:light)",
-        url:"/notes.png",
-        href:"/notes.png"
+        url: "/notes.png",
+        href: "/notes.png",
       },
       {
         media: "(prefers-color-scheme:dark)",
-        url:"/notes.png",
-        href:"/notes.png"
+        url: "/notes.png",
+        href: "/notes.png",
       },
-    ]
-
-  }
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -36,15 +36,18 @@ export default function RootLayout({
     <html lang="en" suppressContentEditableWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
-        <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-        storageKey="jotion-theme-2"
-        >
-          <ModelProvider/>
-          {children}</ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="jotion-theme-2"
+            >
+              <ModelProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>
