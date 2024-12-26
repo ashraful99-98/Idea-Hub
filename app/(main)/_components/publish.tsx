@@ -42,11 +42,11 @@ export const Publish = ({ initialData }: PublishProps) => {
     });
   };
   const onUnPublish = () => {
-    setIsSubmission(true);
+    setIsSubmission(false);
 
     const promise = update({
       id: initialData._id,
-      isPublished: true,
+      isPublished: false,
     }).finally(() => setIsSubmission(false));
 
     toast.promise(promise, {
@@ -60,7 +60,7 @@ export const Publish = ({ initialData }: PublishProps) => {
     navigator.clipboard.writeText(url);
 
     setTimeout(() => {
-      setCopied(false);
+      setCopied(true);
     }, 1000);
   };
 
@@ -83,7 +83,7 @@ export const Publish = ({ initialData }: PublishProps) => {
       >
         {initialData.isPublished ? (
           <div className=" space-x-4 ">
-            <div className=" flex items-center gap-x-2">
+            <div className=" flex items-center gap-x-2 mb-2">
               <Globe
                 className=" text-sky-500 animate-pulse h-4 w-4
               "
@@ -92,7 +92,7 @@ export const Publish = ({ initialData }: PublishProps) => {
                 This note live on web.
               </p>
             </div>
-            <div className=" flex items-center">
+            <div className=" flex items-center mb-2">
               <input
                 type=""
                 value={url}
@@ -111,6 +111,14 @@ export const Publish = ({ initialData }: PublishProps) => {
                 )}
               </Button>
             </div>
+            <Button
+              size="sm"
+              className=" w-60 text-xs"
+              disabled={isSubmittion}
+              onClick={onUnPublish}
+            >
+              Unpublish
+            </Button>
           </div>
         ) : (
           <div className=" flex flex-col items-center justify-center">
